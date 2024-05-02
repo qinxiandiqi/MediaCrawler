@@ -26,11 +26,11 @@ def search(keyword: str, start_page: int = 1):
                             crawler_type="search",
                             start_page=start_page,
                             keyword=keyword)
-        crawler.start()
+        await crawler.start()
     asyncio.get_event_loop().run_until_complete(async_search())
 
 
-server = SimpleXMLRPCServer(("localhost", 8000))
+server = SimpleXMLRPCServer(("localhost", 8000), allow_none=True)
 # 注册MediaCrawler函数
 server.register_function(search, 'search')
 
