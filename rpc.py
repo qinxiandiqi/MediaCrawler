@@ -1,6 +1,7 @@
 import asyncio
 import sys
 from xmlrpc.server import SimpleXMLRPCServer
+from config import base_config
 
 from media_platform.xhs import XiaoHongShuCrawler
 
@@ -13,7 +14,9 @@ def init():
                             crawler_type=None,
                             start_page=1,
                             keyword=None)
+        base_config.HEADLESS = False
         await crawler.start()
+        base_config.HEADLESS = True
     asyncio.get_event_loop().run_until_complete(async_init())
 
 
